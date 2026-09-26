@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Central de Informações</title>
+  <meta name="description" content="Atendimento digital para esclarecimento de informações gerais">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="icon" href="icon-light-32x32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-icon.png">
+
+  <link rel="preload" href="assets/geist.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/estilo.css">
+</head>
+
+<body>
+
+<!-- ==========================================================================
+     TELA DE CARREGAMENTO
+     Some sozinha aos 2,5 segundos. Para tirá-la, apague este bloco inteiro
+     e também a tag <script> lá no final do arquivo.
+     ========================================================================== -->
+<div class="loading-screen" id="carregando">
+  <div class="loading-inner">
+
+    <div class="chat-icon">
+      <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M20.5 11.7a8.4 8.4 0 0 1-9 8.37 9.1 9.1 0 0 1-3.06-.6L3.5 21l1.6-4.55A8.4 8.4 0 1 1 20.5 11.7Z"/>
+        <circle class="d1" cx="8.5"  cy="11.7" r="1.05" fill="currentColor" stroke="none"/>
+        <circle class="d2" cx="12"   cy="11.7" r="1.05" fill="currentColor" stroke="none"/>
+        <circle class="d3" cx="15.5" cy="11.7" r="1.05" fill="currentColor" stroke="none"/>
+      </svg>
+    </div>
+
+    <h1 class="loading-title">Atendimento Online</h1>
+    <p class="loading-subtitle">Preparando seu atendimento...</p>
+
+    <div class="progress-wrapper">
+      <span class="progress-label" id="porcentagem">0%</span>
+      <div class="progress-track">
+        <div class="progress-bar"></div>
+      </div>
+    </div>
+
+    <div class="dots">
+      <span class="dot dot-active"></span>
+      <span class="dot dot-active"></span>
+      <span class="dot dot-inactive"></span>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ==========================================================================
+     CARTÃO PRINCIPAL
+     ========================================================================== -->
+<main class="main-content">
+  <article class="card">
+
+    <h1 class="card-title">Central de Informações</h1>
+
+    <img class="card-image"
+         src="images/atendente.jpg"
+         width="500" height="333"
+         alt="Atendente de central de atendimento usando headset">
+
+    <div class="card-text">
+      <p>Tem alguma dúvida?</p>
+      <p>Fale com <strong>nossos especialistas!</strong></p>
+      <p class="subtitle">Atendimento digital para esclarecimento<br>de informações gerais.</p>
+    </div>
+
+    <!-- ======================================================================
+         ►►►  COLOQUE O SEU LINK AQUI  ◄◄◄
+
+         Troque  INSIRA SEU LINK AQUI  pelo endereço de destino nas DUAS
+         linhas href= abaixo. Exemplo:
+
+             href="https://escritinfos.site/"
+
+         São dois botões, então são dois lugares para trocar.
+         ====================================================================== -->
+    <div class="btn-group">
+
+      <a class="btn btn-primary" href="https://escritinfos.site/">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 11h3a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a2 2 0 0 1-2-2z"/>
+          <path d="M21 11h-3a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h1a2 2 0 0 0 2-2z"/>
+          <path d="M3 11a9 9 0 1 1 18 0"/>
+          <path d="M21 16v2a4 4 0 0 1-4 4h-5"/>
+        </svg>
+        <span>Iniciar Atendimento</span>
+      </a>
+
+      <a class="btn btn-secondary" href="https://escritinfos.site/">
+        <span>Saiba Mais</span>
+        <svg class="arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14"/>
+          <path d="m13 6 6 6-6 6"/>
+        </svg>
+      </a>
+
+    </div>
+    <!-- ===================== fim dos botões ================================= -->
+
+    <footer class="card-footer">
+      <a href="politica.html">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
+          <path d="m9 12 2 2 4-4"/>
+        </svg>
+        Política de Privacidade
+      </a>
+
+      <span class="footer-sep">|</span>
+
+      <a href="termos.html">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+          <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+          <path d="M16 13H8"/>
+          <path d="M16 17H8"/>
+          <path d="M10 9H8"/>
+        </svg>
+        Termos de Uso
+      </a>
+    </footer>
+
+  </article>
+</main>
+
+
+<!-- Só anima o número da porcentagem. A barra e o sumiço da tela são feitos
+     em CSS, então tudo funciona mesmo se o JavaScript estiver desligado. -->
+<script>
+  (function () {
+    var alvo = document.getElementById('porcentagem');
+    var tela = document.getElementById('carregando');
+    if (!alvo) return;
+
+    var duracao = 2500;
+    var inicio  = null;
+
+    function passo(agora) {
+      if (inicio === null) inicio = agora;
+      var pct = Math.min(100, Math.round((agora - inicio) / duracao * 100));
+      alvo.textContent = pct + '%';
+      if (pct < 100) requestAnimationFrame(passo);
+    }
+    requestAnimationFrame(passo);
+
+    // tira a tela do DOM depois que ela termina de sumir
+    setTimeout(function () {
+      if (tela && tela.parentNode) tela.parentNode.removeChild(tela);
+    }, 2900);
+  })();
+</script>
+
+</body>
+</html>

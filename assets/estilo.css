@@ -1,0 +1,535 @@
+/* ==========================================================================
+   Central de Informações — folha de estilo única
+   Paleta: azul (identidade) · laranja (ação) · amarelo (destaque) · branco
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. FONTE
+   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: Geist;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(geist.woff2) format("woff2");
+}
+@font-face {
+  font-family: Geist;
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(geist.woff2) format("woff2");
+}
+@font-face {
+  font-family: Geist;
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(geist.woff2) format("woff2");
+}
+@font-face {
+  font-family: Geist;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(geist.woff2) format("woff2");
+}
+
+/* --------------------------------------------------------------------------
+   2. CORES E MEDIDAS  (mude aqui para reestilizar o site inteiro)
+   -------------------------------------------------------------------------- */
+:root {
+  color-scheme: light;
+
+  --branco:        #ffffff;
+  --texto:         #0f172a;
+  --texto-suave:   #64748b;
+  --borda:         #e3e8ef;
+  --cinza-claro:   #f1f5f9;
+
+  --azul:          #1d4ed8;
+  --azul-escuro:   #1e40af;
+  --azul-suave:    #eff4ff;
+
+  --laranja:       #f97316;
+  --laranja-escuro:#ea580c;
+
+  --amarelo:       #facc15;
+  --amarelo-suave: #fffbeb;
+
+  --sombra-p: 0 1px 2px rgba(15, 23, 42, .05);
+  --sombra-m: 0 1px 3px rgba(15, 23, 42, .06), 0 8px 20px -14px rgba(15, 23, 42, .18);
+  --sombra-g: 0 1px 3px rgba(15, 23, 42, .05), 0 16px 36px -20px rgba(15, 23, 42, .22);
+
+  --raio: 1.25rem;
+}
+
+/* --------------------------------------------------------------------------
+   3. BASE
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { background-color: var(--branco); }
+
+body {
+  min-height: 100vh;
+  color: var(--texto);
+  background-color: var(--branco);
+  font-family: Geist, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+
+img { display: block; max-width: 100%; }
+
+:focus-visible {
+  outline: 2px solid var(--azul);
+  outline-offset: 2px;
+  border-radius: .5rem;
+}
+
+@keyframes surgir {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* --------------------------------------------------------------------------
+   4. TELA DE CARREGAMENTO
+   Some sozinha por CSS aos 2,5s — funciona mesmo sem JavaScript.
+   O JavaScript só anima o número da porcentagem.
+   -------------------------------------------------------------------------- */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+  background-color: var(--branco);
+  animation: esconder-loading .35s ease-in 2.5s forwards;
+}
+
+@keyframes esconder-loading {
+  to { opacity: 0; visibility: hidden; pointer-events: none; }
+}
+
+.loading-inner {
+  width: 100%;
+  max-width: 24rem;
+  text-align: center;
+  animation: surgir .4s ease-out both;
+}
+
+.chat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  margin: 0 auto 1.5rem;
+  border-radius: 1.25rem;
+  color: var(--branco);
+  background-color: var(--azul);
+  box-shadow: var(--sombra-m);
+}
+
+/* os três pontinhos piscando dentro do balão */
+.chat-icon .d1 { animation: piscar 1.4s ease-in-out infinite; }
+.chat-icon .d2 { animation: piscar 1.4s ease-in-out .2s infinite; }
+.chat-icon .d3 { animation: piscar 1.4s ease-in-out .4s infinite; }
+
+@keyframes piscar {
+  0%, 60%, 100% { opacity: .4; }
+  30%           { opacity: 1; }
+}
+
+.loading-title {
+  margin-bottom: .4rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -.02em;
+}
+
+.loading-subtitle {
+  margin-bottom: 2rem;
+  color: var(--texto-suave);
+  font-size: .9375rem;
+}
+
+.progress-wrapper { position: relative; margin-bottom: .5rem; }
+
+.progress-label {
+  position: absolute;
+  top: -1.5rem;
+  right: 0;
+  color: var(--texto-suave);
+  font-size: .8125rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.progress-track {
+  height: .4rem;
+  border-radius: 9999px;
+  background-color: var(--cinza-claro);
+  overflow: hidden;
+}
+
+.progress-bar {
+  width: 0;
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, var(--amarelo), var(--laranja));
+  animation: encher-barra 2.5s linear forwards;
+}
+
+@keyframes encher-barra {
+  to { width: 100%; }
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: .45rem;
+  margin-top: 2rem;
+}
+
+.dot { width: .4rem; height: .4rem; border-radius: 9999px; }
+.dot-active   { background-color: var(--azul); }
+.dot-inactive { background-color: var(--borda); }
+
+/* --------------------------------------------------------------------------
+   5. CARTÃO PRINCIPAL
+   -------------------------------------------------------------------------- */
+.main-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 27rem;
+  padding: 2.5rem 2rem 1.75rem;
+  text-align: center;
+  background-color: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra-g);
+  overflow: hidden;
+  animation: surgir .45s ease-out both;
+}
+
+/* filete amarelo-laranja no topo do cartão */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--amarelo), var(--laranja));
+}
+
+.card-title {
+  margin-bottom: 1.75rem;
+  color: var(--azul);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -.02em;
+}
+
+/* 19/13 é a proporção da foto: assim ela nunca é cortada nem esticada */
+.card-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  margin-bottom: 1.75rem;
+  object-fit: cover;
+  border: 1px solid var(--borda);
+  border-radius: 1rem;
+}
+
+.card-text { margin-bottom: 1.75rem; }
+
+.card-text p {
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.card-text p + p { margin-top: .25rem; }
+
+.card-text strong { color: var(--laranja); font-weight: 700; }
+
+.card-text .subtitle {
+  margin-top: .75rem;
+  color: var(--texto-suave);
+  font-size: .875rem;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   6. BOTÕES
+   -------------------------------------------------------------------------- */
+.btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: .625rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  width: 100%;
+  padding: .9375rem 1.25rem;
+  border: 1.5px solid transparent;
+  border-radius: .75rem;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color .15s, border-color .15s, color .15s;
+}
+
+.btn svg { flex-shrink: 0; }
+
+.btn-primary {
+  color: var(--branco);
+  background-color: var(--laranja);
+  border-color: var(--laranja);
+}
+.btn-primary:hover {
+  background-color: var(--laranja-escuro);
+  border-color: var(--laranja-escuro);
+}
+
+.btn-secondary {
+  color: var(--azul);
+  background-color: var(--branco);
+  border-color: var(--azul);
+}
+.btn-secondary:hover { background-color: var(--azul-suave); }
+
+/* a setinha desliza quando o mouse passa */
+.btn .arrow { transition: transform .18s ease-out; }
+.btn:hover .arrow { transform: translateX(3px); }
+
+/* --------------------------------------------------------------------------
+   7. RODAPÉ DO CARTÃO
+   -------------------------------------------------------------------------- */
+.card-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--borda);
+  color: var(--texto-suave);
+  font-size: .8125rem;
+}
+
+.card-footer a {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .2rem;
+  transition: color .15s;
+}
+.card-footer a:hover { color: var(--azul); }
+.card-footer svg { flex-shrink: 0; }
+
+.footer-sep { color: var(--borda); }
+
+/* --------------------------------------------------------------------------
+   8. PÁGINAS DE POLÍTICA E TERMOS
+   -------------------------------------------------------------------------- */
+.legal-body { padding: 2.5rem 1rem 3.5rem; }
+
+.legal-wrap { max-width: 36rem; margin: 0 auto; }
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  margin-bottom: 1.25rem;
+  padding: .45rem .9rem .45rem .7rem;
+  color: var(--azul);
+  background-color: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: 9999px;
+  box-shadow: var(--sombra-p);
+  font-size: .875rem;
+  font-weight: 600;
+  transition: border-color .15s, background-color .15s;
+}
+.back-link:hover {
+  border-color: var(--azul);
+  background-color: var(--azul-suave);
+}
+.back-link svg { flex-shrink: 0; transition: transform .18s ease-out; }
+.back-link:hover svg { transform: translateX(-2px); }
+
+.legal-card {
+  position: relative;
+  width: 100%;
+  max-width: 36rem;
+  margin: 0 auto;
+  padding: 2.25rem 2rem 2.5rem;
+  background-color: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra-m);
+  overflow: hidden;
+}
+
+.legal-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--amarelo), var(--laranja));
+}
+
+.legal-card h1 {
+  margin-bottom: 1rem;
+  color: var(--azul);
+  font-size: 1.625rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+}
+
+.legal-card .intro {
+  margin-bottom: 1.75rem;
+  color: var(--texto-suave);
+  font-size: .9375rem;
+  line-height: 1.65;
+}
+
+/* cada título de seção ganha uma barrinha laranja à esquerda */
+.legal-card h2 {
+  display: flex;
+  align-items: flex-start;
+  gap: .5rem;
+  margin-top: 1.75rem;
+  margin-bottom: .5rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
+.legal-card h2::before {
+  content: "";
+  display: block;
+  flex-shrink: 0;
+  width: 3px;
+  height: 1.05rem;
+  margin-top: .26rem;
+  border-radius: 9999px;
+  background-color: var(--laranja);
+}
+
+.legal-card p {
+  margin-bottom: .75rem;
+  font-size: .9375rem;
+  line-height: 1.65;
+}
+
+.legal-card a.external {
+  color: var(--azul);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  overflow-wrap: anywhere;
+}
+.legal-card a.external:hover { color: var(--laranja); }
+
+.aviso {
+  margin-top: 2rem;
+  padding: 1.125rem 1.375rem;
+  background-color: var(--amarelo-suave);
+  border: 1px solid var(--borda);
+  border-left: 3px solid var(--amarelo);
+  border-radius: .25rem .75rem .75rem .25rem;
+}
+.aviso strong {
+  display: block;
+  margin-bottom: .4rem;
+  font-size: .875rem;
+  font-weight: 700;
+}
+.aviso p {
+  margin-bottom: 0;
+  color: var(--texto-suave);
+  font-size: .8125rem;
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   9. PÁGINA 404
+   -------------------------------------------------------------------------- */
+.erro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+.erro-codigo {
+  color: var(--azul);
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -.03em;
+}
+.erro-texto {
+  margin: .75rem 0 1.75rem;
+  color: var(--texto-suave);
+  font-size: 1rem;
+}
+
+/* --------------------------------------------------------------------------
+   10. TELAS ESTREITAS
+   -------------------------------------------------------------------------- */
+@media (max-width: 430px) {
+  .card       { padding: 2.25rem 1.375rem 1.5rem; }
+  .card-title { font-size: 1.375rem; }
+  .card-footer{ gap: .4rem 1.15rem; font-size: .78rem; }
+  .footer-sep { display: none; }
+  .legal-body { padding: 2rem .75rem 3rem; }
+  .legal-card { padding: 2rem 1.375rem 2.25rem; }
+}
+
+@media (min-width: 768px) {
+  .card-title { font-size: 1.75rem; }
+}
+
+/* --------------------------------------------------------------------------
+   11. QUEM PREFERE MENOS ANIMAÇÃO
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+  /* a tela de carregamento precisa sumir mesmo assim */
+  .loading-screen { animation: esconder-loading .01ms linear 2.5s forwards; }
+  .progress-bar   { width: 100%; animation: none; }
+}
